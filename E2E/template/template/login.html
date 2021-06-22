@@ -1,0 +1,46 @@
+{% extends 'template/base.html' %}
+
+{% block body_block %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ user_data.as_p }}
+  {{ user_pic.as_p }}
+
+  <input type="Submit" name="" value="Submit" class="btn btn-primary">
+
+</form>
+
+<form class="" action="{% url 'template: user_login' %}" method="post">
+
+  {% csrf_token %}
+  <label for="username"> Username: </label>
+  <input type="text" name="username" placeholder="username">
+
+  <label for="password">Password: </label>
+  <input type="text" name="Password" placeholder="password">
+
+  <input type="submit" name="" value="login">
+
+
+
+</form>
+
+{% if items %}
+<table>
+  <thead>
+    <th>UserName</th>
+    <th>Email</th>
+  </thead>
+  {% for i in items %}
+  <tr>
+
+    <td>{{i.username}}</td>
+    <td>{{i.email}}</td>
+    {% endfor %}
+  </tr>
+</table>
+{% else %}
+<p>no table created yet</p>
+{% endif %}
+{% endblock %}
